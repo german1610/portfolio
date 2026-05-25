@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Arquitecta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #fafaf8;
+    --gray-light: #f2f0ed;
+    --gray-mid: #c8c5be;
+    --gray-text: #6b6860;
+    --accent: #b8a98a;
+    --accent-dark: #8a7a62;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid #ddd9d2;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 1.4rem;
+    letter-spacing: 0.12em;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .logo span { font-style: italic; color: var(--accent-dark); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav a {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--gray-text);
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--black); }
+
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 3rem 4rem 3rem;
+    border-right: 0.5px solid #ddd9d2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gray-text);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 2rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent-dark);
+  }
+
+  .hero-desc {
+    font-size: 0.9rem;
+    color: var(--gray-text);
+    max-width: 380px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.75rem;
+    background: var(--black);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+
+  .hero-cta:hover { background: var(--accent-dark); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--gray-light);
+  }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    flex: 1;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(8px);
+    padding: 1rem;
+    border: 0.5px solid #ddd9d2;
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--black);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray-text);
+    margin-top: 0.25rem;
+  }
+
+  section {
+    padding: 5rem 3rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.5px solid #ddd9d2;
+  }
+
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--gray-mid);
+    font-style: italic;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-portrait {
+    background: var(--gray-light);
+    aspect-ratio: 3/4;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Foto real: descomentá esto y cambiá la ruta */
+  /*
+  .about-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+  */
+
+  .portrait-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--gray-mid);
+  }
+
+  .portrait-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .about-text h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+
+  .about-text h3 em { font-style: italic; color: var(--accent-dark); }
+
+  .about-text p {
+    font-size: 0.88rem;
+    color: var(--gray-text);
+    line-height: 1.9;
+    margin-bottom: 1rem;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .skill-item {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-text);
+    padding: 0.5rem 0;
+    border-top: 0.5px solid #ddd9d2;
+  }
+
+  .projects-section { background: var(--gray-light); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+  }
+
+  .project-card {
+    background: var(--white);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+
+  .project-card:hover { transform: translateY(-4px); }
+
+  .project-img {
+    aspect-ratio: 4/3;
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-img svg { width: 100%; height: 100%; }
+
+  .project-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(250,250,248,0.9);
+    padding: 0.3rem 0.7rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+
+  .project-info {
+    padding: 1.25rem;
+    border-top: 0.5px solid #ddd9d2;
+  }
+
+  .project-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+  }
+
+  .project-meta {
+    font-size: 0.7rem;
+    color: var(--gray-text);
+    letter-spacing: 0.08em;
+  }
+
+  .ba-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .ba-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 1rem;
+  }
+
+  .ba-img {
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Fotos antes/después: agregá imagen así dentro de .ba-img:
+     <img src="tu-foto.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;">
+  */
+
+  .ba-before {
+    background: #e8e4de;
+    color: var(--gray-text);
+  }
+
+  .ba-after {
+    background: var(--black);
+    color: rgba(250,250,248,0.5);
+  }
+
+  .ba-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .ba-desc {
+    font-size: 0.75rem;
+    color: var(--gray-text);
+  }
+
+  .services-section { background: var(--black); color: var(--white); }
+  .services-section .section-title { color: var(--white); }
+  .services-section .section-num { color: rgba(255,255,255,0.3); }
+  .services-section .section-header { border-color: rgba(255,255,255,0.1); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 0.5px solid rgba(255,255,255,0.1);
+  }
+
+  .service-item {
+    padding: 2rem 1.75rem;
+    border-right: 0.5px solid rgba(255,255,255,0.1);
+    border-bottom: 0.5px solid rgba(255,255,255,0.1);
+    transition: background 0.2s;
+  }
+
+  .service-item:hover { background: rgba(255,255,255,0.04); }
+
+  .service-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+  }
+
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .service-desc {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.75;
+  }
+
+  .contact-section { background: var(--white); }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-text h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-text h3 em { font-style: italic; color: var(--accent-dark); }
+
+  .contact-text p {
+    font-size: 0.85rem;
+    color: var(--gray-text);
+    line-height: 1.9;
+    margin-bottom: 2rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 0.5px solid #ddd9d2;
+    text-decoration: none;
+    color: var(--black);
+    font-size: 0.82rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent-dark);
+    background: var(--gray-light);
+  }
+
+  .contact-link-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--gray-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .contact-link-info { flex: 1; }
+  .contact-link-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-text); margin-bottom: 0.1rem; }
+  .contact-link-val { font-weight: 500; }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-field label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray-text);
+  }
+
+  .form-field input,
+  .form-field textarea {
+    padding: 0.85rem 1rem;
+    border: 0.5px solid #c8c5be;
+    background: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--black);
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+
+  .form-field input:focus,
+  .form-field textarea:focus { border-color: var(--black); }
+
+  .form-submit {
+    padding: 0.9rem 2rem;
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    align-self: flex-start;
+  }
+
+  .form-submit:hover { background: var(--accent-dark); }
+
+  footer {
+    padding: 2rem 3rem;
+    border-top: 0.5px solid #ddd9d2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--gray-text);
+  }
+
+  .footer-copy {
+    font-size: 0.65rem;
+    color: var(--gray-mid);
+    letter-spacing: 0.1em;
+  }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .revealed { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { gap: 1rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    section { padding: 3.5rem 1.5rem; }
+    .about-grid, .contact-inner { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .ba-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">estudio <span>arq.</span></a>
+  <ul>
+    <li><a href="#sobre-mi">Sobre mí</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#remodelaciones">Remodelaciones</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Arquitectura · Diseño · Remodelación</p>
+    <h1 class="hero-title">Espacios que<br><em>transforman</em><br>vidas</h1>
+    <p class="hero-desc">Diseño proyectos, planos y remodelaciones de ambientes con una mirada que combina funcionalidad, estética y la identidad de cada cliente.</p>
+    <a href="#proyectos" class="hero-cta">Ver portfolio →</a>
+  </div>
+  <div class="hero-right">
+    <svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+      <rect width="600" height="700" fill="#1a1917"/>
+      <g stroke="#f2f0ed" stroke-width="0.5" fill="none" opacity="0.15">
+        <rect x="80" y="80" width="440" height="540" rx="0"/>
+        <line x1="80" y1="280" x2="520" y2="280"/>
+        <line x1="280" y1="80" x2="280" y2="280"/>
+        <line x1="80" y1="450" x2="520" y2="450"/>
+        <line x1="350" y1="280" x2="350" y2="620"/>
+        <line x1="80" y1="550" x2="350" y2="550"/>
+      </g>
+      <g stroke="#b8a98a" stroke-width="1" fill="none" opacity="0.6">
+        <rect x="120" y="310" width="120" height="110" rx="0"/>
+        <rect x="390" y="480" width="90" height="100" rx="0"/>
+        <circle cx="180" cy="250" r="40" stroke-dasharray="4 3"/>
+        <rect x="300" y="100" width="160" height="140" rx="0"/>
+      </g>
+      <g fill="#b8a98a" font-family="'Cormorant Garamond', serif" font-size="10" letter-spacing="2" opacity="0.8">
+        <text x="340" y="175" text-anchor="middle">LIVING</text>
+        <text x="180" y="252" text-anchor="middle" font-size="8">COMEDOR</text>
+        <text x="180" y="365" text-anchor="middle" font-size="8">SUITE</text>
+        <text x="430" y="535" text-anchor="middle" font-size="8">BAÑO</text>
+      </g>
+      <g stroke="#b8a98a" stroke-width="0.4" opacity="0.4">
+        <line x1="80" y1="650" x2="520" y2="650"/>
+        <line x1="80" y1="645" x2="80" y2="655"/>
+        <line x1="520" y1="645" x2="520" y2="655"/>
+        <text x="300" y="665" fill="#b8a98a" font-family="monospace" font-size="8" text-anchor="middle" opacity="0.7">12.40 m</text>
+        <line x1="540" y1="80" x2="540" y2="620"/>
+        <line x1="535" y1="80" x2="545" y2="80"/>
+        <line x1="535" y1="620" x2="545" y2="620"/>
+        <text x="560" y="355" fill="#b8a98a" font-family="monospace" font-size="8" text-anchor="middle" opacity="0.7" transform="rotate(90,560,355)">14.20 m</text>
+      </g>
+      <g fill="none" stroke="#f2f0ed" stroke-width="0.5" opacity="0.2">
+        <rect x="310" y="110" width="60" height="40"/>
+        <rect x="380" y="110" width="60" height="40"/>
+        <circle cx="420" cy="200" r="25"/>
+        <rect x="130" y="320" width="90" height="60"/>
+        <rect x="155" y="375" width="40" height="20"/>
+      </g>
+    </svg>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">+40</div>
+        <div class="stat-label">Proyectos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">8</div>
+        <div class="stat-label">Años de exp.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Satisfacción</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE MÍ -->
+<section id="sobre-mi">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Sobre mí</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-portrait reveal">
+      <!--
+        PARA AGREGAR TU FOTO: reemplazá el bloque de abajo por:
+        <img src="tu-foto.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+      -->
+      <div class="portrait-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#c8c5be" stroke-width="1">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+        <span class="portrait-label">Tu foto aquí</span>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <h3>Diseño espacios<br>con <em>intención</em></h3>
+      <!-- EDITÁ ESTE TEXTO CON TU BIO REAL -->
+      <p>Soy arquitecta con más de 8 años de experiencia en diseño residencial, remodelaciones y proyectos de interiores. Mi enfoque combina rigor técnico con sensibilidad estética para crear espacios que realmente funcionen para las personas que los habitan.</p>
+      <p>Cada proyecto es una historia diferente. Escucho, analizo y propongo soluciones que respetan el presupuesto, los tiempos y — sobre todo — los sueños de mis clientes.</p>
+      <div class="skills-grid">
+        <!-- EDITÁ ESTAS ESPECIALIDADES SEGÚN LO QUE VOS HACÉS -->
+        <div class="skill-item">Diseño residencial</div>
+        <div class="skill-item">Planos técnicos</div>
+        <div class="skill-item">3D y renders</div>
+        <div class="skill-item">Dirección de obra</div>
+        <div class="skill-item">Interiorismo</div>
+        <div class="skill-item">Remodelaciones</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROYECTOS -->
+<section id="proyectos" class="projects-section">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Proyectos</h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-img">
+        <!--
+          PARA AGREGAR FOTO DE PROYECTO:
+          <img src="foto-proyecto1.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;">
+        -->
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="300" fill="#1a1917"/>
+          <g stroke="#f2f0ed" stroke-width="0.5" fill="none" opacity="0.08">
+            <rect x="40" y="40" width="320" height="220"/>
+            <line x1="40" y1="160" x2="360" y2="160"/>
+            <line x1="200" y1="40" x2="200" y2="160"/>
+          </g>
+          <g fill="none" stroke="#b8a98a" stroke-width="0.8" opacity="0.7">
+            <rect x="70" y="70" width="110" height="80"/>
+            <rect x="220" y="170" width="110" height="60"/>
+            <circle cx="200" cy="200" r="30" stroke-dasharray="3 2"/>
+          </g>
+          <text x="200" y="290" fill="#b8a98a" font-family="monospace" font-size="7" text-anchor="middle" opacity="0.5">PLANTA BAJA · ESC 1:100</text>
+        </svg>
+        <span class="project-tag">Residencial</span>
+      </div>
+      <div class="project-info">
+        <p class="project-name">Casa Familiar — Córdoba</p>
+        <p class="project-meta">Proyecto completo · 220 m²</p>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-img">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="300" fill="#2c2c2a"/>
+          <g stroke="#f2f0ed" stroke-width="0.4" fill="none" opacity="0.06">
+            <rect x="30" y="30" width="340" height="240"/>
+          </g>
+          <g fill="none" stroke="#b8a98a" stroke-width="0.8" opacity="0.6">
+            <rect x="50" y="50" width="300" height="200"/>
+            <rect x="80" y="80" width="80" height="60"/>
+            <rect x="240" y="80" width="80" height="60"/>
+            <rect x="150" y="160" width="100" height="70"/>
+            <line x1="50" y1="140" x2="350" y2="140"/>
+          </g>
+          <text x="200" y="290" fill="#b8a98a" font-family="monospace" font-size="7" text-anchor="middle" opacity="0.5">DEPARTAMENTO · ESC 1:75</text>
+        </svg>
+        <span class="project-tag">Departamento</span>
+      </div>
+      <div class="project-info">
+        <p class="project-name">Dpto. Moderno — Villa Carlos Paz</p>
+        <p class="project-meta">Diseño interior · 95 m²</p>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-img">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="300" fill="#0a0a0a"/>
+          <g stroke="#f2f0ed" stroke-width="0.5" fill="none" opacity="0.1">
+            <rect x="20" y="20" width="360" height="260"/>
+            <line x1="20" y1="150" x2="380" y2="150"/>
+          </g>
+          <g fill="none" stroke="#c8a96a" stroke-width="0.8" opacity="0.65">
+            <rect x="40" y="40" width="150" height="90"/>
+            <rect x="210" y="40" width="150" height="90"/>
+            <rect x="40" y="160" width="320" height="100"/>
+            <circle cx="120" cy="210" r="25"/>
+            <circle cx="280" cy="210" r="25"/>
+          </g>
+          <text x="200" y="290" fill="#c8a96a" font-family="monospace" font-size="7" text-anchor="middle" opacity="0.5">LOCAL COMERCIAL · ESC 1:50</text>
+        </svg>
+        <span class="project-tag">Comercial</span>
+      </div>
+      <div class="project-info">
+        <p class="project-name">Local Gastronómico — Centro</p>
+        <p class="project-meta">Diseño y habilitación · 140 m²</p>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-img">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="300" fill="#1e1c18"/>
+          <g stroke="#b8a98a" stroke-width="0.6" fill="none" opacity="0.5">
+            <rect x="60" y="50" width="280" height="180"/>
+            <line x1="200" y1="50" x2="200" y2="230"/>
+            <rect x="80" y="70" width="100" height="70"/>
+            <rect x="220" y="70" width="100" height="70"/>
+            <rect x="80" y="160" width="240" height="50"/>
+          </g>
+          <g fill="#b8a98a" opacity="0.3">
+            <rect x="130" y="100" width="20" height="30"/>
+            <rect x="250" y="100" width="20" height="30"/>
+          </g>
+          <text x="200" y="290" fill="#b8a98a" font-family="monospace" font-size="7" text-anchor="middle" opacity="0.5">VIVIENDA UNIFAMILIAR · ESC 1:100</text>
+        </svg>
+        <span class="project-tag">Vivienda</span>
+      </div>
+      <div class="project-info">
+        <p class="project-name">Casa Dúplex — Zona Sierra</p>
+        <p class="project-meta">Proyecto y dirección · 180 m²</p>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-img">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="300" fill="#16140f"/>
+          <g stroke="#d4c9a8" stroke-width="0.5" fill="none" opacity="0.35">
+            <rect x="30" y="30" width="340" height="240"/>
+            <rect x="50" y="50" width="140" height="200"/>
+            <rect x="210" y="50" width="140" height="90"/>
+            <rect x="210" y="160" width="140" height="90"/>
+          </g>
+          <g fill="none" stroke="#b8a98a" stroke-width="1" opacity="0.7">
+            <circle cx="120" cy="150" r="50" stroke-dasharray="5 3"/>
+          </g>
+          <text x="200" y="290" fill="#b8a98a" font-family="monospace" font-size="7" text-anchor="middle" opacity="0.5">DISEÑO INTERIOR · ESC 1:50</text>
+        </svg>
+        <span class="project-tag">Interior</span>
+      </div>
+      <div class="project-info">
+        <p class="project-name">Estudio de Trabajo — Palermo</p>
+        <p class="project-meta">Interiorismo · 75 m²</p>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-img">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="300" fill="#111110"/>
+          <g stroke="#b8a98a" stroke-width="0.5" fill="none" opacity="0.4">
+            <rect x="40" y="40" width="320" height="220"/>
+            <rect x="60" y="60" width="130" height="100"/>
+            <rect x="210" y="60" width="130" height="100"/>
+            <rect x="60" y="180" width="280" height="60"/>
+            <line x1="200" y1="40" x2="200" y2="260"/>
+            <circle cx="200" cy="130" r="20" stroke-dasharray="4 2"/>
+          </g>
+          <text x="200" y="290" fill="#b8a98a" font-family="monospace" font-size="7" text-anchor="middle" opacity="0.5">AMPLIACIÓN · ESC 1:75</text>
+        </svg>
+        <span class="project-tag">Ampliación</span>
+      </div>
+      <div class="project-info">
+        <p class="project-name">Ampliación — Country Club</p>
+        <p class="project-meta">Ampliación y reforma · 60 m²</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- REMODELACIONES ANTES / DESPUÉS -->
+<section id="remodelaciones">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Antes & Después</h2>
+  </div>
+  <div class="ba-grid">
+
+    <div class="ba-item reveal">
+      <div class="ba-images">
+        <div class="ba-img ba-before">
+          <!-- FOTO ANTES: <img src="cocina-antes.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;"> -->
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8a7a62" stroke-width="1">
+            <rect x="3" y="3" width="18" height="18"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+          </svg>
+          <span>Antes</span>
+        </div>
+        <div class="ba-img ba-after">
+          <!-- FOTO DESPUÉS: <img src="cocina-despues.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;"> -->
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(250,250,248,0.4)" stroke-width="1">
+            <path d="M3 9l9-6 9 6v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/>
+          </svg>
+          <span>Después</span>
+        </div>
+      </div>
+      <p class="ba-label">Cocina integrada — San Vicente</p>
+      <p class="ba-desc">Apertura de muro, nuevo layout, isla central y cambio de materiales. Obra: 3 semanas.</p>
+    </div>
+
+    <div class="ba-item reveal">
+      <div class="ba-images">
+        <div class="ba-img ba-before">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8a7a62" stroke-width="1">
+            <rect x="3" y="3" width="18" height="18"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+          </svg>
+          <span>Antes</span>
+        </div>
+        <div class="ba-img ba-after">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(250,250,248,0.4)" stroke-width="1">
+            <path d="M3 9l9-6 9 6v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/>
+          </svg>
+          <span>Después</span>
+        </div>
+      </div>
+      <p class="ba-label">Living-comedor — Villa Carlos Paz</p>
+      <p class="ba-desc">Integración de ambientes, nueva paleta y soluciones de guardado. Obra: 2 semanas.</p>
+    </div>
+
+    <div class="ba-item reveal">
+      <div class="ba-images">
+        <div class="ba-img ba-before">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8a7a62" stroke-width="1">
+            <rect x="3" y="3" width="18" height="18"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+          </svg>
+          <span>Antes</span>
+        </div>
+        <div class="ba-img ba-after">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(250,250,248,0.4)" stroke-width="1">
+            <path d="M3 9l9-6 9 6v11a2 2 0 01-2 2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+          <span>Después</span>
+        </div>
+      </div>
+      <p class="ba-label">Baño principal — Córdoba Capital</p>
+      <p class="ba-desc">Remodelación completa, nuevo revestimiento, vanitory a medida y doble espejo.</p>
+    </div>
+
+    <div class="ba-item reveal">
+      <div class="ba-images">
+        <div class="ba-img ba-before">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8a7a62" stroke-width="1">
+            <rect x="3" y="3" width="18" height="18"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+          </svg>
+          <span>Antes</span>
+        </div>
+        <div class="ba-img ba-after">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(250,250,248,0.4)" stroke-width="1">
+            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
+          </svg>
+          <span>Después</span>
+        </div>
+      </div>
+      <p class="ba-label">Dormitorio suite — Mendiolaza</p>
+      <p class="ba-desc">Vestidor integrado, cabecera tapizada y optimización de iluminación natural.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="services-section">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Servicios</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-item reveal">
+      <div class="service-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <rect x="3" y="3" width="18" height="18"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+        </svg>
+      </div>
+      <p class="service-name">Planos y Proyectos</p>
+      <p class="service-desc">Proyecto completo con planos técnicos, memoria descriptiva y documentación para permiso de obra.</p>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M3 9l9-6 9 6v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+        </svg>
+      </div>
+      <p class="service-name">Remodelación de Ambientes</p>
+      <p class="service-desc">Rediseño integral de cocinas, baños, livings y dormitorios. Incluye gestión de proveedores y seguimiento de obra.</p>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+      </div>
+      <p class="service-name">Renders 3D y Visualización</p>
+      <p class="service-desc">Imágenes fotorrealistas de tu proyecto antes de ejecutar la obra. Recorrido virtual y láminas de presentación.</p>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/>
+        </svg>
+      </div>
+      <p class="service-name">Dirección de Obra</p>
+      <p class="service-desc">Supervisión técnica de la ejecución, control de calidad, plazos y presupuesto. Tu obra en manos expertas.</p>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
+      </div>
+      <p class="service-name">Asesoramiento de Interiorismo</p>
+      <p class="service-desc">Paleta de colores, materiales, mobiliario y decoración. Una sola consulta puede transformar completamente un espacio.</p>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <circle cx="12" cy="12" r="3"/><path d="M6.3 17.7a9 9 0 1011.4 0"/>
+        </svg>
+      </div>
+      <p class="service-name">Ampliaciones</p>
+      <p class="service-desc">Proyecto de ampliación de viviendas existentes. Integración armónica de lo nuevo con lo construido.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="contact-section">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Hablemos</h2>
+  </div>
+  <div class="contact-inner">
+    <div class="contact-text reveal">
+      <h3>¿Tenés un proyecto<br>en <em>mente</em>?</h3>
+      <p>Cuéntame tu idea, el espacio disponible y lo que necesitás. Trabajamos juntos para encontrar la mejor solución dentro de tu presupuesto y tiempo.</p>
+      <div class="contact-links">
+        <!-- CAMBIÁ EL NÚMERO DE WHATSAPP: reemplazá 5493511234567 por tu número con código de país -->
+        <a href="https://wa.me/5493511234567" class="contact-link">
+          <div class="contact-link-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a7a4a" stroke-width="1.5">
+              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+            </svg>
+          </div>
+          <div class="contact-link-info">
+            <p class="contact-link-label">WhatsApp</p>
+            <p class="contact-link-val">+54 9 351 000-0000</p>
+          </div>
+          <span style="color:var(--gray-mid); font-size:0.8rem">→</span>
+        </a>
+        <!-- CAMBIÁ EL EMAIL -->
+        <a href="mailto:hola@estudioarq.com" class="contact-link">
+          <div class="contact-link-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6b6860" stroke-width="1.5">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div class="contact-link-info">
+            <p class="contact-link-label">Email</p>
+            <p class="contact-link-val">hola@estudioarq.com</p>
+          </div>
+          <span style="color:var(--gray-mid); font-size:0.8rem">→</span>
+        </a>
+        <!-- CAMBIÁ EL INSTAGRAM -->
+        <a href="https://instagram.com/estudioarq" class="contact-link">
+          <div class="contact-link-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a4a7a" stroke-width="1.5">
+              <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="#8a4a7a"/>
+            </svg>
+          </div>
+          <div class="contact-link-info">
+            <p class="contact-link-label">Instagram</p>
+            <p class="contact-link-val">@estudioarq</p>
+          </div>
+          <span style="color:var(--gray-mid); font-size:0.8rem">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-form reveal">
+      <div class="form-field">
+        <label>Nombre</label>
+        <input type="text" placeholder="Tu nombre completo">
+      </div>
+      <div class="form-field">
+        <label>Email</label>
+        <input type="email" placeholder="tu@email.com">
+      </div>
+      <div class="form-field">
+        <label>Tipo de proyecto</label>
+        <input type="text" placeholder="Ej: Remodelación baño, proyecto casa nueva...">
+      </div>
+      <div class="form-field">
+        <label>Contame más</label>
+        <textarea rows="4" placeholder="Descripción del espacio, superficie aproximada, zona, presupuesto estimado..."></textarea>
+      </div>
+      <button class="form-submit" onclick="alert('Conectar formulario con tu email o WhatsApp Business')">Enviar consulta →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">estudio arq.</span>
+  <span class="footer-copy">© 2026 · Córdoba, Argentina · Todos los derechos reservados</span>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('revealed'), i * 60);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(r => obs.observe(r));
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
